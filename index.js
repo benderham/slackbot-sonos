@@ -38,13 +38,4 @@ var checkTrack = function() {
   setTimeout(checkTrack, 1000)
 }
 
-//checkTrack()
-
-var testPost = function() {
-  return bot.sendWebhook({
-    text: "Test Post",
-    channel: '#testing'
-  })
-}
-
-testPost();
+checkTrack()
