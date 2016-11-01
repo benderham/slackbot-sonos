@@ -5,9 +5,9 @@ var config      = require('./config')
 var sonos       = new Sonos(config.sonos.ip)
 
 var bot = controller.spawn({
-  token: config.slack.token
-}).configureIncomingWebhook({
-  url: config.slack.webhook_url
+  incoming_webhook: {
+    url: config.slack.webhook_url
+  }
 })
 
 var trackState  = {}
@@ -19,11 +19,6 @@ var trackText = function(track) {
   return {
     text: "Now Playing: " + track.title + " by " + track.artist
   }
-}
-
-var blameWho = function(x) {
-  x["blame"] = "Chris"
-  return x
 }
 
 var sameTrack = function(x, y) {
@@ -44,4 +39,13 @@ var checkTrack = function() {
   setTimeout(checkTrack, 1000)
 }
 
-checkTrack()
+//checkTrack()
+
+var testPost = function() {
+  return bot.sendWebhook({
+    text: "Test Post",
+    channel: '#testing'
+  })
+}
+
+testPost();
