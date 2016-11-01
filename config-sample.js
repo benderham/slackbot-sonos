@@ -1,5 +1,6 @@
 this.slack = {
-  token: "YOUR_TOKEN_HERE"
+  token: "YOUR_TOKEN_HERE",
+  webhook_url: "YOUR_WEBHOOK_URL_HERE"
 }
 
 this.sonos = {
