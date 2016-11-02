@@ -1,36 +1,36 @@
-var Botkit      = require('botkit')
-var controller  = Botkit.slackbot()
-var Sonos       = require('sonos').Sonos
-var sonos       = new Sonos(process.env.SONOS_IP, process.env.PORT || 1400)
+'use strict'
+const Botkit      = require('botkit')
+const controller  = Botkit.slackbot()
+const Sonos       = require('sonos').Sonos
+const sonos       = new Sonos(process.env.SONOS_IP)
 
-var bot = controller.spawn({
+const bot = controller.spawn({
+  debug: true,
   incoming_webhook: {
     url: process.env.WEBHOOK_URL
   }
 })
 
-var trackState  = {}
-var updateState = function(track) {
+let trackState  = {}
+const updateState = function(track) {
   return trackState = track
 }
 
-var trackText = function(track) {
+const trackText = function(track) {
   return {
     text: "Now Playing: " + track.title + " by " + track.artist
   }
 }
 
-var sameTrack = function(x, y) {
+const sameTrack = function(x, y) {
   return x.title === y.title && x.artist === y.artist
 }
 
-var postTrack = function(track) {
-  console.log('Posting Track');
+const postTrack = function(track) {
   return bot.sendWebhook(trackText(track))
 }
 
-var checkTrack = function() {
-  console.log('Checking Track')
+const checkTrack = function() {
   sonos.currentTrack(function (err, track) {
     if (err) { return console.log(err) }
     if (sameTrack(trackState, track)) { return null }
