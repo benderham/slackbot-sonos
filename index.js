@@ -25,10 +25,12 @@ var sameTrack = function(x, y) {
 }
 
 var postTrack = function(track) {
+  console.log('Posting Track');
   return bot.sendWebhook(trackText(track))
 }
 
 var checkTrack = function() {
+  console.log('Checking Track')
   sonos.currentTrack(function (err, track) {
     if (err) { return console.log(err) }
     if (sameTrack(trackState, track)) { return null }
