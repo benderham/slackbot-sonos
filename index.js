@@ -1,7 +1,7 @@
 var Botkit      = require('botkit')
 var controller  = Botkit.slackbot()
 var Sonos       = require('sonos').Sonos
-var sonos       = new Sonos(process.env.SONOS_IP)
+var sonos       = new Sonos(process.env.SONOS_IP, process.env.SONOS_PORT || 1400)
 
 var bot = controller.spawn({
   incoming_webhook: {
